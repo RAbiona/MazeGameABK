@@ -7,6 +7,7 @@
 
 #include "Enemy.h"
 #include "Key.h"
+#include "ExtraLife.h"
 #include "Door.h"
 #include "Money.h"
 #include "Goal.h"
@@ -189,6 +190,19 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			}
 			break;
 		}
+		case ActorType::ExtraLife:
+		{
+			ExtraLife* collidedExtraLife = dynamic_cast<ExtraLife*>(collidedActor);
+			assert(collidedExtraLife);
+			m_player.IncrementLives();
+			collidedActor->Remove();
+			m_player.SetPosition(newPlayerX, newPlayerY);
+			AudioManager::GetInstance()->PlayGainLivesSound();
+
+			break;
+
+		}
+
 		case ActorType::Door:
 		{
 			Door* collidedDoor = dynamic_cast<Door*>(collidedActor);
