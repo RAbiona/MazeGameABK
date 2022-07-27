@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Game.h"
+#include "ExtraLife.h"
 #include "AudioManager.h"
 #include "StateMachineExampleGame.h"
 
